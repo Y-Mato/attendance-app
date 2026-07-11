@@ -23,12 +23,41 @@ export default function Home() {
     return () => clearInterval(timer)
   }, [])
 
+  // ボタンの下の時刻表示処理
   function getNowString(){
     const now = new Date()
     const hh = String(now.getHours()).padStart(2, "0")
     const mm = String(now.getMinutes()).padStart(2, "0")
     return hh + ":" + mm
   }
+
+  function toMinutes(timeStr) {
+    const [h,m] = timeStr.split(":")
+    return Number(h) * 60 + Number(m)
+  }
+
+  function formatMinutes(totalMinutes) {
+    const h = Math.floor(totalMinutes / 60)
+    const m = totalMinutes % 60
+    return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0")
+  }
+
+  // チェックインと現在時間からチェックアウトの時間計算
+  let workedMinutes = 0
+  if (checkInTime !== "-") {
+    const end = checkOutTime !== "-" ? checkOutTime : currentTime
+    workedMinutes = toMinutes(end) - toMinutes(checkInTime)
+  }
+  // 休憩開始と現在時間から休憩終了するまでの時間計算
+  let breakMinutes = 0
+  if (breakStartTime !== "-") {
+    const end = breakEndTime !== "-" ? breakEndTime : currentTime
+    breakMinutes = toMinutes(end) -toMinutes(breakStartTime)
+  }
+  // 休憩時間を差し引いた実際の労働時間
+  const actualMinutes = workedMinutes - breakMinutes
+
+  const overTime = workedMinutes - 480
 
   return(
   // 画面サイズ色指定、背景灰色
@@ -148,19 +177,19 @@ export default function Home() {
       </div>
       <div className="flex justify-between pt-4">
         <div>🏢勤務予定</div>
-        <div>09:00 ~ 18:00</div>
+        <div>09:00 ~ 17:00</div>
       </div>
       <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
         <div>⏰実績時間</div>
-        <div>00:41</div>
+        <div>{actualMinutes}</div>
       </div>
       <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
         <div>☕️休憩時間</div>
-        <div>00:00</div>
+        <div>{breakMinutes}</div>
       </div>
       <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
         <div>⏰残業時間</div>
-        <div>00:00</div>
+        <div>{overTime}</div>
       </div>
     </div>
     {/* お知らせ画面 */}
