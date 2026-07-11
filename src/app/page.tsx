@@ -39,12 +39,12 @@ export default function Home() {
     return hh + ":" + mm
   }
 
-  function toMinutes(timeStr) {
+  function toMinutes(timeStr: string) {
     const [h,m] = timeStr.split(":")
     return Number(h) * 60 + Number(m)
   }
 
-  function formatMinutes(totalMinutes) {
+  function formatMinutes(totalMinutes: number) {
     const h = Math.floor(totalMinutes / 60)
     const m = totalMinutes % 60
     return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0")
