@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 勤怠管理アプリ（attendance-app）
 
-## Getting Started
+出勤・退勤・休憩の打刻ができる、モバイル風の勤怠管理アプリです。Next.js（App Router）と React の学習を兼ねて、1からUIとロジックを実装しました。
 
-First, run the development server:
+## スクリーンショット
+
+<!-- ここにスクリーンショット画像を1枚貼ってください。例:
+![screenshot](./public/screenshot.png)
+-->
+
+## 主な機能
+
+- 出勤 / 退勤 / 休憩開始 / 休憩終了 の打刻（タップした瞬間の時刻を記録）
+- 未出勤時は退勤・休憩ボタンを押せないなど、状態に応じたボタンの活性/非活性制御
+- 現在時刻のリアルタイム表示（1秒ごとに更新）
+- 実績時間・休憩時間・残業時間の自動計算
+- Tailwind CSSによるモバイルアプリ風のUI
+
+## 使用技術
+
+- [Next.js](https://nextjs.org/) 16 (App Router / Turbopack)
+- [React](https://react.dev/) 19
+- TypeScript
+- [Tailwind CSS](https://tailwindcss.com/) v4
+
+## セットアップ
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000) をブラウザで開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 今後の課題
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+現時点で分かっている改善点は [Issues](https://github.com/Y-Mato/attendance-app/issues) で管理しています。
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 実績時間・休憩時間・残業時間の表示フォーマット（HH:MM形式）への対応
+- 残業時間がマイナス値になる場合の表示修正
+- 日付のリアルタイム化（現在は固定値）
+- ページタイトル・メタデータの調整
