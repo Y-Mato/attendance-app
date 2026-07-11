@@ -57,7 +57,7 @@ export default function Home() {
   // 休憩時間を差し引いた実際の労働時間
   const actualMinutes = workedMinutes - breakMinutes
 
-  const overTime = workedMinutes - 480
+  const overTime = Math.max(0, workedMinutes - 480)
 
   return(
   // 画面サイズ色指定、背景灰色
