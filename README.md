@@ -8,7 +8,7 @@
 ![screenshot](./public/screenshot.png)
 
 
-##デモ
+##　デモ
 
 [https://attendance-app-rust-gamma.vercel.app](https://attendance-app-rust-gamma.vercel.app)
 
@@ -39,9 +39,8 @@ npm run dev
 
 ## 今後の課題
 
-現時点で分かっている改善点は [Issues](https://github.com/Y-Mato/attendance-app/issues) で管理しています。
+過去に見つかった不具合・改善点は [Issues](https://github.com/Y-Mato/attendance-app/issues?q=is%3Aissue+is%3Aclosed) で管理し、対応済みです。
 
-- 実績時間・休憩時間・残業時間の表示フォーマット（HH:MM形式）への対応
-- 残業時間がマイナス値になる場合の表示修正
-- 日付のリアルタイム化（現在は固定値）
-- ページタイトル・メタデータの調整
+今後の展望:
+- コンポーネント分割によるコードの整理
+- `localStorage`によるデータ永続化
