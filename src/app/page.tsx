@@ -11,6 +11,8 @@ export default function Home() {
 
   const [currentTime, setCurrentTime] = useState("--:--:--")
 
+  const [todayDate, setTodayDate] = useState("")
+
   // 現在時刻リアルタイム表示処理
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,6 +23,12 @@ export default function Home() {
       setCurrentTime(hh + ":" + mm + ":" + ss)
     }, 1000)
     return () => clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    const now = new Date()
+    const week = ["日", "月", "火", "水", "木", "金", "土"]
+    setTodayDate(`${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日(${week[now.getDay()]})`)
   }, [])
 
   // ボタンの下の時刻表示処理
@@ -56,7 +64,7 @@ export default function Home() {
   }
   // 休憩時間を差し引いた実際の労働時間
   const actualMinutes = workedMinutes - breakMinutes
-
+  // 残業時間計算
   const overTime = Math.max(0, workedMinutes - 480)
 
   return(
@@ -85,7 +93,7 @@ export default function Home() {
       {/* 左右離れさせる */}
       <div className="flex justify-between">
         <span>
-          2025年5月20日(火)
+          {todayDate}
         </span>
         <span>
           📅カレンダー
