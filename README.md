@@ -4,9 +4,9 @@
 
 ## スクリーンショット
 
-<!-- ここにスクリーンショット画像を1枚貼ってください。例:
-![screenshot](./public/screenshot.png)
--->
+
+[screenshot](./public/screenshot.png)
+
 
 ## 主な機能
 
