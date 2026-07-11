@@ -181,15 +181,15 @@ export default function Home() {
       </div>
       <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
         <div>⏰実績時間</div>
-        <div>{actualMinutes}</div>
+        <div>{formatMinutes(actualMinutes)}</div>
       </div>
       <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
         <div>☕️休憩時間</div>
-        <div>{breakMinutes}</div>
+        <div>{formatMinutes(breakMinutes)}</div>
       </div>
       <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
         <div>⏰残業時間</div>
-        <div>{overTime}</div>
+        <div>{formatMinutes(overTime)}</div>
       </div>
     </div>
     {/* お知らせ画面 */}
