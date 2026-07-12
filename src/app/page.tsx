@@ -13,18 +13,39 @@ export default function Home() {
 
   const [todayDate, setTodayDate] = useState("")
 
+  // 画面が開いたら保存済みの値の読み込む
+  useEffect(() => {
+    const savedCheckIn = localStorage.getItem("checkInTime")
+    const savedCheckOut = localStorage.getItem("checkOutTime")
+    const savedBreakStart = localStorage.getItem("breakStartTime")
+    const savedBreakEnd = localStorage.getItem("breakEndTime")
+    if (savedCheckIn) setCheckInTime(savedCheckIn)
+    if (savedCheckOut) setCheckOutTime(savedCheckOut)
+    if (savedBreakStart) setBreakStartTime(savedBreakStart)
+    if (savedBreakEnd) setBreakEndTime(savedBreakEnd)
+  }, [])
+
+    // 状態が変わるたびに保存
+  useEffect(() => {
+    localStorage.setItem("checkInTime", checkInTime)
+    localStorage.setItem("checkOutTime", checkOutTime)
+    localStorage.setItem("breakStartTime", breakStartTime)
+    localStorage.setItem("breakEndTime", breakEndTime)
+  }, [checkInTime, checkOutTime, breakStartTime, breakEndTime])
+
   // 現在時刻リアルタイム表示処理
   useEffect(() => {
     const timer = setInterval(() => {
-      const now = new Date()
-      const hh = String(now.getHours()).padStart(2, "0")
-      const mm = String(now.getMinutes()).padStart(2, "0")
-      const ss = String(now.getSeconds()).padStart(2, "0")
-      setCurrentTime(hh + ":" + mm + ":" + ss)
+    const now = new Date()
+    const hh = String(now.getHours()).padStart(2, "0")
+    const mm = String(now.getMinutes()).padStart(2, "0")
+    const ss = String(now.getSeconds()).padStart(2, "0")
+    setCurrentTime(hh + ":" + mm + ":" + ss)
     }, 1000)
     return () => clearInterval(timer)
   }, [])
 
+  // 日付リアルタイム表示
   useEffect(() => {
     const now = new Date()
     const week = ["日", "月", "火", "水", "木", "金", "土"]
