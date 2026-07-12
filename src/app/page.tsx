@@ -15,18 +15,24 @@ export default function Home() {
 
   // 画面が開いたら保存済みの値の読み込む
   useEffect(() => {
-    const savedCheckIn = localStorage.getItem("checkInTime")
-    const savedCheckOut = localStorage.getItem("checkOutTime")
-    const savedBreakStart = localStorage.getItem("breakStartTime")
-    const savedBreakEnd = localStorage.getItem("breakEndTime")
-    if (savedCheckIn) setCheckInTime(savedCheckIn)
-    if (savedCheckOut) setCheckOutTime(savedCheckOut)
-    if (savedBreakStart) setBreakStartTime(savedBreakStart)
-    if (savedBreakEnd) setBreakEndTime(savedBreakEnd)
+    const savedDate = localStorage.getItem("savedDate")
+    const today = new Date().toDateString()
+
+    if (savedDate === today) {
+      const savedCheckIn = localStorage.getItem("checkInTime")
+      const savedCheckOut = localStorage.getItem("checkOutTime")
+      const savedBreakStart = localStorage.getItem("breakStartTime")
+      const savedBreakEnd = localStorage.getItem("breakEndTime")
+      if (savedCheckIn) setCheckInTime(savedCheckIn)
+      if (savedCheckOut) setCheckOutTime(savedCheckOut)
+      if (savedBreakStart) setBreakStartTime(savedBreakStart)
+      if (savedBreakEnd) setBreakEndTime(savedBreakEnd)
+    }
   }, [])
 
     // 状態が変わるたびに保存
   useEffect(() => {
+    localStorage.setItem("savedDate", new Date().toDateString())
     localStorage.setItem("checkInTime", checkInTime)
     localStorage.setItem("checkOutTime", checkOutTime)
     localStorage.setItem("breakStartTime", breakStartTime)
