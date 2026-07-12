@@ -164,10 +164,10 @@ export default function Home() {
         {/* 休憩開始ボタン */}
         <div className="flex flex-col items-center">
           <div className={`w-14 h-14 rounded-full flex items-center justify-center ${
-            checkInTime === "-" || breakStartTime !== "-" ? 
+            checkInTime === "-" || breakStartTime !== "-" || checkOutTime !== "-" ? 
             "bg-gray-200 cursor-not-allowed" : "bg-yellow-100 cursor-pointer"}`}
           onClick={() => {
-            if (checkInTime === "-" || breakStartTime !== "-") return
+            if (checkInTime === "-" || breakStartTime !== "-" || checkOutTime !== "-") return
               setBreakStartTime(getNowString())
             }}>
             ☕️
