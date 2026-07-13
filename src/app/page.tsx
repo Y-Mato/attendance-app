@@ -3,6 +3,8 @@
 import BottomNav from "./components/BottomNav"
 import Header from "./components/Header"
 import StatusCard from "./components/StatusCard"
+import Greeting from "./components/Greeting"
+import NoticeCard from "./components/NoticeCard"
 import { useState, useEffect} from "react"
 
 export default function Home() {
@@ -100,14 +102,12 @@ export default function Home() {
   return(
   // 画面サイズ色指定、背景灰色
   <div className="bg-gray-100 max-w-md mx-auto min-h-screen w-full text-gray-900 pb-20">
-   
-   <Header />
+
+    <Header />
 
     {/* 挨拶文 */}
-    <div className="p-4">
-      <p className="text-2xl font-bold">おはようございます！</p>
-      <p className="text-gray-600">今日も1日頑張りましょう！</p>
-    </div>
+    <Greeting />
+
     {/* 時間入力画面 */}
     <div className="bg-white rounded-2xl shadow-md mx-4 p-4">
       {/* 左右離れさせる */}
@@ -198,6 +198,7 @@ export default function Home() {
 
     </div>
     
+    {/* 勤務状況画面 */}
     <StatusCard 
       workedTime={formatMinutes(actualMinutes)}
       breakTime={formatMinutes(breakMinutes)}
@@ -205,24 +206,8 @@ export default function Home() {
     />
 
     {/* お知らせ画面 */}
-    <div className="bg-white rounded-2xl shadow-md mx-4 p-4 my-4">
-      <div className="flex justify-between">
-        <div className="font-bold">🔔 お知らせ</div>
-        <div className="text-blue-500 cursor-pointer">一覧へ ＞</div>
-      </div>
-      <div className="my-4 text-sm text-gray-500">2025/05/19 
-        <span className="inline-block bg-blue-500 text-white rounded-full px-4 py-1 mx-2 ">
-          お知らせ
-        </span>
-      </div>
-      <div className="flex justify-between">
-        <div className="text-sm">
-          5月の勤怠締め日は5/31(土)です。
-        </div>
-        <div className="text-sm">＞</div>
-      </div>
-    </div>
-
+    <NoticeCard />
+    
     <BottomNav />
 
   </div>
