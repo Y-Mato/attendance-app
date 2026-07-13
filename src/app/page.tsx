@@ -1,6 +1,7 @@
 "use client"
 
 import BottomNav from "./components/BottomNav"
+import Header from "./components/Header"
 import { useState, useEffect} from "react"
 
 export default function Home() {
@@ -98,19 +99,9 @@ export default function Home() {
   return(
   // 画面サイズ色指定、背景灰色
   <div className="bg-gray-100 max-w-md mx-auto min-h-screen w-full text-gray-900 pb-20">
-    {/* 3つのアイコンを左、真ん中、右の配置にしpadding=4でアイコンの両橋に余白、青いタグ */}
-    <header className="flex items-center justify-between bg-blue-500 text-white p-4">
-      
-      <span>
-          ≡
-      </span>
-      <span>
-          勤怠
-      </span>
-      <span>
-          🔔
-      </span>
-    </header>
+   
+   <Header />
+
     {/* 挨拶文 */}
     <div className="p-4">
       <p className="text-2xl font-bold">おはようございます！</p>
@@ -248,7 +239,7 @@ export default function Home() {
     </div>
 
     <BottomNav />
-    
+
   </div>
          
     
