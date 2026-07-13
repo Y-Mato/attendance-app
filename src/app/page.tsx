@@ -2,6 +2,7 @@
 
 import BottomNav from "./components/BottomNav"
 import Header from "./components/Header"
+import StatusCard from "./components/StatusCard"
 import { useState, useEffect} from "react"
 
 export default function Home() {
@@ -196,29 +197,13 @@ export default function Home() {
       )}
 
     </div>
-    {/* 勤務状況画面 */}
-    <div className="bg-white rounded-2xl shadow-md mx-4 p-4 my-4">
-      <div className="flex justify-between">
-        <div className="font-bold"><span className="text-blue-500">| </span>本日の勤務状況</div>
-        <div className="text-blue-500 cursor-pointer">詳細を見る ＞</div>
-      </div>
-      <div className="flex justify-between pt-4">
-        <div>🏢勤務予定</div>
-        <div>09:00 ~ 17:00</div>
-      </div>
-      <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
-        <div>⏰実績時間</div>
-        <div>{formatMinutes(actualMinutes)}</div>
-      </div>
-      <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
-        <div>☕️休憩時間</div>
-        <div>{formatMinutes(breakMinutes)}</div>
-      </div>
-      <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
-        <div>⏰残業時間</div>
-        <div>{formatMinutes(overTime)}</div>
-      </div>
-    </div>
+    
+    <StatusCard 
+      workedTime={formatMinutes(actualMinutes)}
+      breakTime={formatMinutes(breakMinutes)}
+      overTime={formatMinutes(overTime)}
+    />
+
     {/* お知らせ画面 */}
     <div className="bg-white rounded-2xl shadow-md mx-4 p-4 my-4">
       <div className="flex justify-between">
