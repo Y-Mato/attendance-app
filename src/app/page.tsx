@@ -5,6 +5,7 @@ import Header from "./components/Header"
 import StatusCard from "./components/StatusCard"
 import Greeting from "./components/Greeting"
 import NoticeCard from "./components/NoticeCard"
+import ClockCard from "./components/ClockCard"
 import { useState, useEffect} from "react"
 
 export default function Home() {
@@ -110,26 +111,12 @@ export default function Home() {
 
     {/* 時間入力画面 */}
     <div className="bg-white rounded-2xl shadow-md mx-4 p-4">
-      {/* 左右離れさせる */}
-      <div className="flex justify-between">
-        <span>
-          {todayDate}
-        </span>
-        <span>
-          📅カレンダー
-        </span>
-      </div>
-      <div className="text-center text-gray-500 text-sm">
-          現在時刻
-      </div>
-      <div className="text-center text-4xl font-bold">
-          {currentTime}
-      </div>
-      <div className="text-center">
-        <span className="inline-block bg-green-100 text-green-600 rounded-full px-3 py-1 text-sm">
-          勤務中
-        </span>
-      </div>
+      
+      <ClockCard 
+        todayDate={todayDate}
+        currentTime={currentTime}
+      />
+      
     
       {/* 4つのアイコンボタンが綺麗に並ぶようにした */}
       <div className="flex justify-between">
@@ -207,7 +194,7 @@ export default function Home() {
 
     {/* お知らせ画面 */}
     <NoticeCard />
-    
+
     <BottomNav />
 
   </div>
