@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function StatusCard({workedTime, breakTime, overTime}: 
     {workedTime: string, breakTime: string, overTime: string}) {
     return(
@@ -5,7 +7,7 @@ export default function StatusCard({workedTime, breakTime, overTime}:
         {/* 勤務状況画面 */}
             <div className="flex justify-between">
                 <div className="font-bold"><span className="text-blue-500">| </span>本日の勤務状況</div>
-                <div className="text-blue-500 cursor-pointer">詳細を見る ＞</div>
+                <Link href="/status" className="text-blue-500 cursor-pointer">詳細を見る ＞</Link>
             </div>
             <div className="flex justify-between pt-4">
                 <div>🏢勤務予定</div>

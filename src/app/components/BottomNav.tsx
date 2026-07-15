@@ -1,4 +1,4 @@
-
+import Link from "next/link"
 
 export default function BottomNav() {
     return(
@@ -7,22 +7,22 @@ export default function BottomNav() {
         <span>🏠</span>
         <span>ホーム</span>
       </div>
-      <div className="flex flex-col items-center text-gray-500 text-xs">
+      <Link href="/status" className="flex flex-col items-center text-gray-500 text-xs">
         <span>⏰</span>
         <span>勤怠</span>
-      </div>
-      <div className="flex flex-col items-center text-gray-500 text-xs">
+      </Link>
+      <Link href="/requests" className="flex flex-col items-center text-gray-500 text-xs">
         <span>📃</span>
         <span>申請</span>
-      </div>
-      <div className="flex flex-col items-center text-gray-500 text-xs">
+      </Link>
+      <Link href="/reports" className="flex flex-col items-center text-gray-500 text-xs">
         <span>📊</span>
         <span>集計</span>
-      </div>
-      <div className="flex flex-col items-center text-gray-500 text-xs">
+      </Link>
+      <Link href="/mypage" className="flex flex-col items-center text-gray-500 text-xs">
         <span>👤</span>
         <span>マイページ</span>
-      </div>
+      </Link>
     </div>
     )
 }
