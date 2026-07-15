@@ -8,6 +8,8 @@ import NoticeCard from "./components/NoticeCard"
 import ClockCard from "./components/ClockCard"
 import ActionButtons from "./components/ActionButtons"
 import { useState, useEffect} from "react"
+import { useRouter } from "next/navigation"
+import { supabase } from "./lib/supabase"
 
 export default function Home() {
 
@@ -19,6 +21,20 @@ export default function Home() {
   const [currentTime, setCurrentTime] = useState("--:--:--")
 
   const [todayDate, setTodayDate] = useState("")
+
+  const router = useRouter()
+
+
+  // ログインしていなければloginページへ飛ばす
+  useEffect(() => {
+    async function checkAuth() {
+      const { data } = await supabase.auth.getSession()
+      if (!data.session) {
+        router.push("/login")
+      }
+    }
+    checkAuth()
+  }, [])
 
   // 画面が開いたら保存済みの値の読み込む
   useEffect(() => {
