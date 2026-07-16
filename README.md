@@ -20,6 +20,8 @@
 - 現在時刻のリアルタイム表示（1秒ごとに更新）
 - 実績時間・休憩時間・残業時間の自動計算
 - Tailwind CSSによるモバイルアプリ風のUI
+- Supabase Authによるユーザー登録・ログイン機能（未ログイン時は自動でログイン画面にリダイレクト）
+- 打刻データはSupabase（PostgreSQL）にユーザーごとに保存され、リロードしても復元される
 
 ## 使用技術
 
@@ -27,6 +29,7 @@
 - [React](https://react.dev/) 19
 - TypeScript
 - [Tailwind CSS](https://tailwindcss.com/) v4
+- [Supabase](https://supabase.com/)（Auth / Database）
 
 ## セットアップ
 
@@ -35,6 +38,19 @@ npm install
 npm run dev
 ```
 
+### 環境変数
+
+Supabaseと連携するため、プロジェクトルートに`.env.local`を作成し、以下を設定してください。
+
+```
+NEXT_PUBLIC_SUPABASE_URL=（SupabaseプロジェクトのURL）
+NEXT_PUBLIC_SUPABASE_ANON_KEY=（Supabaseのanon publicキー）
+```
+
+
+値はSupabaseダッシュボードの「Project Settings → API」から取得できます。
+
+
 [http://localhost:3000](http://localhost:3000) をブラウザで開いてください。
 
 ## 今後の課題
@@ -42,5 +58,5 @@ npm run dev
 過去に見つかった不具合・改善点は [Issues](https://github.com/Y-Mato/attendance-app/issues?q=is%3Aissue+is%3Aclosed) で管理し、対応済みです。
 
 今後の展望:
-- コンポーネント分割によるコードの整理
-- `localStorage`によるデータ永続化
+- 各画面の作成
+
