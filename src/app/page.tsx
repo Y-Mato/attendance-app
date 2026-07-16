@@ -142,6 +142,13 @@ export default function Home() {
   const actualMinutes = workedMinutes - breakMinutes
   // 残業時間計算
   const overTime = Math.max(0, workedMinutes - 480)
+  //勤務ステータスの判定
+  let status = "before"
+  if (checkInTime !== "-" && checkOutTime === "-") {
+    status = breakStartTime !== "-" && breakEndTime === "-" ? "break" : "working"
+  } else if (checkOutTime !== "-") {
+    status = "after"
+  }
 
   return(
   // 画面サイズ色指定、背景灰色
@@ -158,6 +165,7 @@ export default function Home() {
       <ClockCard 
         todayDate={todayDate}
         currentTime={currentTime}
+        status={status}
       />
       
     
