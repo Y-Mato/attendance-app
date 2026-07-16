@@ -24,6 +24,9 @@ export default function Home() {
 
   const router = useRouter()
 
+  const [userId, setUserId] = useState<string | null>(null)
+  const [hasLoaded, setHasLoaded] = useState(false)
+
 
   // ログインしていなければloginページへ飛ばす
   useEffect(() => {
@@ -31,36 +34,59 @@ export default function Home() {
       const { data } = await supabase.auth.getSession()
       if (!data.session) {
         router.push("/login")
+        return
       }
+      setUserId(data.session.user.id)
     }
     checkAuth()
   }, [])
 
   // 画面が開いたら保存済みの値の読み込む
   useEffect(() => {
-    const savedDate = localStorage.getItem("savedDate")
-    const today = new Date().toDateString()
-
-    if (savedDate === today) {
-      const savedCheckIn = localStorage.getItem("checkInTime")
-      const savedCheckOut = localStorage.getItem("checkOutTime")
-      const savedBreakStart = localStorage.getItem("breakStartTime")
-      const savedBreakEnd = localStorage.getItem("breakEndTime")
-      if (savedCheckIn) setCheckInTime(savedCheckIn)
-      if (savedCheckOut) setCheckOutTime(savedCheckOut)
-      if (savedBreakStart) setBreakStartTime(savedBreakStart)
-      if (savedBreakEnd) setBreakEndTime(savedBreakEnd)
+    if (!userId) return
+    async function loadToday() {
+      const todayISO =new Date().toISOString().slice(0,10)
+      const {data} = await supabase
+        .from("attendance_records")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("date", todayISO)
+        .maybeSingle()
+      if (data) {
+        setCheckInTime(data.check_in_time ?? "-")
+        setCheckOutTime(data.check_out_time ?? "-")
+        setBreakStartTime(data.break_start_time ?? "-")
+        setBreakEndTime(data.break_end_time ?? "-")
+      }
+      setHasLoaded(true)
     }
-  }, [])
+    loadToday()
+  }, [userId])
+  
+
+
 
     // 状態が変わるたびに保存
   useEffect(() => {
-    localStorage.setItem("savedDate", new Date().toDateString())
-    localStorage.setItem("checkInTime", checkInTime)
-    localStorage.setItem("checkOutTime", checkOutTime)
-    localStorage.setItem("breakStartTime", breakStartTime)
-    localStorage.setItem("breakEndTime", breakEndTime)
-  }, [checkInTime, checkOutTime, breakStartTime, breakEndTime])
+    if (!userId || !hasLoaded) return
+    async function saveToday() {
+      const todayISO = new Date().toISOString().slice(0,10)
+      const { error } = 
+      await supabase.from("attendance_records").upsert({
+        user_id: userId,
+        date: todayISO,
+        check_in_time: checkInTime,
+        check_out_time: checkOutTime,
+        break_start_time: breakStartTime,
+        break_end_time: breakEndTime,
+      }, {onConflict: "user_id,date"})
+      if (error) {
+        console.log("保存エラー:", error)
+      }
+    }
+    saveToday()
+  }, [checkInTime, checkOutTime, breakStartTime, breakEndTime, hasLoaded, userId])
+
 
   // 現在時刻リアルタイム表示処理
   useEffect(() => {
