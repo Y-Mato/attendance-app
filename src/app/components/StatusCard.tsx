@@ -14,7 +14,7 @@ export default function StatusCard({workedTime, breakTime, overTime}:
                 <div>09:00 ~ 17:00</div>
             </div>
             <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
-                <div>⏰実績時間</div>
+                <div>⏰実働時間</div>
                 <div>{workedTime}</div>
             </div>
             <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
